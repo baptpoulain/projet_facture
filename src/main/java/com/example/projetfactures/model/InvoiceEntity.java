@@ -25,7 +25,7 @@ public class InvoiceEntity {
     @Column(name = "id_client")
     private int idClient;
     @ManyToOne
-    @JoinColumn(name = "id_client", referencedColumnName = "id_client", nullable = false)
+    @JoinColumn(name = "id_client", referencedColumnName = "id_client", insertable = false, updatable = false)
     private ClientEntity clientByIdClient;
     @OneToMany(mappedBy = "invoiceByIdInvoice")
     private Collection<InvoiceProductEntity> invoiceProductsByIdInvoice;

@@ -33,10 +33,19 @@ public class ClientEntity {
     @Column(name = "id_users")
     private int idUsers;
     @ManyToOne
-    @JoinColumn(name = "id_users", referencedColumnName = "id_users", nullable = false)
+    @JoinColumn(name = "id_users", referencedColumnName = "id_users", insertable = false, updatable = false)
     private UsersEntity usersByIdUsers;
     @OneToMany(mappedBy = "clientByIdClient")
     private Collection<InvoiceEntity> invoicesByIdClient;
+
+    public ClientEntity(String nameClient, String cityClient) {
+        this.nameClient = nameClient;
+        this.cityClient = cityClient;
+    }
+
+    public ClientEntity() {
+
+    }
 
     public int getIdClient() {
         return idClient;
