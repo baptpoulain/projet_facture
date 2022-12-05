@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="projetFactures-1.0-SNAPSHOT.war">
+    <root id="archive" name="demo_jakartaee-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="projetFactures:war exploded" />
     </root>
   </artifact>
