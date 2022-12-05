@@ -9,12 +9,20 @@
 <body>
 
 <h1>Listes des clients</h1>
+<thead>
+<tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>City</th>
+</tr>
+</thead>
+<tbody>
 <c:forEach items="${clients}" var="client">
     <tr>
-    <td id="gameId">${client.idClient}</td>
-    <td>${client.nameClient}</td>
-    <td>${client.cityClient}</td>
+    <td id="clientId">${client.idClient} - ${client.nameClient} - ${client.cityClient}</td>
     </tr>
 </c:forEach>
+</tbody>
+
 </body>
 </html>

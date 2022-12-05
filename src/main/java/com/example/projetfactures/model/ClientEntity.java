@@ -38,15 +38,6 @@ public class ClientEntity {
     @OneToMany(mappedBy = "clientByIdClient")
     private Collection<InvoiceEntity> invoicesByIdClient;
 
-    public ClientEntity(String nameClient, String cityClient) {
-        this.nameClient = nameClient;
-        this.cityClient = cityClient;
-    }
-
-    public ClientEntity() {
-
-    }
-
     public int getIdClient() {
         return idClient;
     }
@@ -116,17 +107,18 @@ public class ClientEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ClientEntity that = (ClientEntity) o;
+        ClientEntity client = (ClientEntity) o;
 
-        if (idClient != that.idClient) return false;
-        if (idUsers != that.idUsers) return false;
-        if (adressClient != null ? !adressClient.equals(that.adressClient) : that.adressClient != null) return false;
-        if (nameClient != null ? !nameClient.equals(that.nameClient) : that.nameClient != null) return false;
-        if (telClient != null ? !telClient.equals(that.telClient) : that.telClient != null) return false;
-        if (emailClient != null ? !emailClient.equals(that.emailClient) : that.emailClient != null) return false;
-        if (postalCodeClient != null ? !postalCodeClient.equals(that.postalCodeClient) : that.postalCodeClient != null)
+        if (idClient != client.idClient) return false;
+        if (idUsers != client.idUsers) return false;
+        if (adressClient != null ? !adressClient.equals(client.adressClient) : client.adressClient != null)
             return false;
-        if (cityClient != null ? !cityClient.equals(that.cityClient) : that.cityClient != null) return false;
+        if (nameClient != null ? !nameClient.equals(client.nameClient) : client.nameClient != null) return false;
+        if (telClient != null ? !telClient.equals(client.telClient) : client.telClient != null) return false;
+        if (emailClient != null ? !emailClient.equals(client.emailClient) : client.emailClient != null) return false;
+        if (postalCodeClient != null ? !postalCodeClient.equals(client.postalCodeClient) : client.postalCodeClient != null)
+            return false;
+        if (cityClient != null ? !cityClient.equals(client.cityClient) : client.cityClient != null) return false;
 
         return true;
     }

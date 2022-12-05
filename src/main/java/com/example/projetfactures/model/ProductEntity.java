@@ -23,7 +23,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productByIdProduct")
     private Collection<InvoiceProductEntity> invoiceProductsByIdProduct;
     @ManyToOne
-    @JoinColumn(name = "id_tva", referencedColumnName = "id_tva")
+    @JoinColumn(name = "id_tva", referencedColumnName = "id_tva", insertable = false, updatable = false)
     private TvaEntity tvaByIdTva;
 
     public int getIdProduct() {

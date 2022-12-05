@@ -15,7 +15,7 @@ public class InvoiceProductEntity {
     @Column(name = "id_product")
     private int idProduct;
     @ManyToOne
-    @JoinColumn(name = "id_invoice", referencedColumnName = "id_invoice", insertable = false, updatable = false)
+    @JoinColumn(name = "id_invoice", referencedColumnName = "id_invoice",insertable = false, updatable = false)
     private InvoiceEntity invoiceByIdInvoice;
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.projetfactures.utils.EntityManager.getEntityInstance;
+
 public class ClientDao implements Dao<ClientEntity> {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
+    private EntityManagerFactory emf = getEntityInstance();
 
     @Override
     public Optional<ClientEntity> get(int id) {
