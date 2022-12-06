@@ -14,8 +14,11 @@ public class InvoiceProductEntity {
     @Id
     @Column(name = "id_product")
     private int idProduct;
+    @Basic
+    @Column(name = "quantity")
+    private Integer quantity;
     @ManyToOne
-    @JoinColumn(name = "id_invoice", referencedColumnName = "id_invoice",insertable = false, updatable = false)
+    @JoinColumn(name = "id_invoice", referencedColumnName = "id_invoice", insertable = false, updatable = false)
     private InvoiceEntity invoiceByIdInvoice;
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)
@@ -37,6 +40,14 @@ public class InvoiceProductEntity {
         this.idProduct = idProduct;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,6 +57,7 @@ public class InvoiceProductEntity {
 
         if (idInvoice != that.idInvoice) return false;
         if (idProduct != that.idProduct) return false;
+        if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
 
         return true;
     }
@@ -54,6 +66,7 @@ public class InvoiceProductEntity {
     public int hashCode() {
         int result = idInvoice;
         result = 31 * result + idProduct;
+        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
         return result;
     }
 

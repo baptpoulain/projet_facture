@@ -38,6 +38,22 @@ public class ClientEntity {
     @OneToMany(mappedBy = "clientByIdClient")
     private Collection<InvoiceEntity> invoicesByIdClient;
 
+    public ClientEntity() {
+    }
+
+    public ClientEntity(int idClient, String adressClient, String nameClient, String telClient, String emailClient, Integer postalCodeClient, String cityClient, int idUsers) {
+        this.idClient = idClient;
+        this.adressClient = adressClient;
+        this.nameClient = nameClient;
+        this.telClient = telClient;
+        this.emailClient = emailClient;
+        this.postalCodeClient = postalCodeClient;
+        this.cityClient = cityClient;
+        this.idUsers = idUsers;
+
+
+    }
+
     public int getIdClient() {
         return idClient;
     }

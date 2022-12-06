@@ -1,6 +1,6 @@
 package com.example.projetfactures.dao;
 
-import com.example.projetfactures.model.ClientEntity;
+import com.example.projetfactures.model.InvoiceEntity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -9,21 +9,44 @@ import java.util.Optional;
 
 import static com.example.projetfactures.utils.EntityManager.getEntityInstance;
 
-public class ClientDao implements Dao<ClientEntity> {
+public class DaoInvoice implements Dao<InvoiceEntity> {
+
 
     private EntityManagerFactory emf = getEntityInstance();
 
+    public Optional<List<InvoiceEntity>> getInvoiceByIdClient(int idClient){
+        List<InvoiceEntity> invoiceList = new ArrayList<>();
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try{
+            et.begin();
+
+            TypedQuery<InvoiceEntity> query = em.createQuery("SELECT f from InvoiceEntity f INNER JOIN ClientEntity c ON f.idClient = :idParam", InvoiceEntity.class)
+                    .setParameter("idParam", idClient);
+            invoiceList = query.getResultList();
+            et.commit();
+            return Optional.of(invoiceList);
+        }catch (Exception e){
+            e.printStackTrace();
+            if(et.isActive()) {et.rollback();}
+        } finally {
+            em.close();
+        }
+        return Optional.empty();
+    }
+
+
     @Override
-    public Optional<ClientEntity> get(int id) {
+    public Optional<InvoiceEntity> get(int id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            ClientEntity client = em.createQuery("SELECT c FROM ClientEntity c WHERE c.id = :idParam", ClientEntity.class)
+            InvoiceEntity invoice = em.createQuery("SELECT b FROM InvoiceEntity b WHERE b.id = :idParam", InvoiceEntity.class)
                     .setParameter("idParam", id)
                     .getSingleResult();
             et.commit();
-            return Optional.of(client);
+            return Optional.of(invoice);
         } catch (Exception e) {
             if (et.isActive()) {
                 et.rollback();
@@ -35,8 +58,8 @@ public class ClientDao implements Dao<ClientEntity> {
     }
 
     @Override
-    public List<ClientEntity> getAll() {
-        List<ClientEntity> clientList = new ArrayList<>();
+    public List<InvoiceEntity> getAll() {
+        List<InvoiceEntity> invoiceList = new ArrayList<>();
 
         EntityManager entityManager = emf.createEntityManager();
         EntityTransaction et = entityManager.getTransaction();
@@ -44,8 +67,8 @@ public class ClientDao implements Dao<ClientEntity> {
         try{
             et.begin();
 
-            TypedQuery<ClientEntity> query = entityManager.createQuery("SELECT c from ClientEntity c", ClientEntity.class);
-            clientList = query.getResultList();
+            TypedQuery<InvoiceEntity> query = entityManager.createQuery("SELECT g from InvoiceEntity g", InvoiceEntity.class);
+            invoiceList = query.getResultList();
             et.commit();
         }catch (Exception e){
             e.printStackTrace();
@@ -53,16 +76,16 @@ public class ClientDao implements Dao<ClientEntity> {
         } finally {
             entityManager.close();
         }
-        return clientList;
+        return invoiceList;
     }
 
     @Override
-    public void save(ClientEntity clientEntity) {
+    public void save(InvoiceEntity invoiceEntity) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.merge(clientEntity);
+            em.persist(invoiceEntity);
             et.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,13 +98,13 @@ public class ClientDao implements Dao<ClientEntity> {
     }
 
     @Override
-    public void update(ClientEntity clientEntity) {
-        ClientEntity clientUpdated = null;
+    public void update(InvoiceEntity invoiceEntity) {
+        InvoiceEntity invoiceUpdated = null;
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            clientUpdated = em.merge(clientEntity);
+            invoiceUpdated = em.merge(invoiceEntity);
             et.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,14 +116,15 @@ public class ClientDao implements Dao<ClientEntity> {
         }
     }
 
+
     @Override
-    public void delete(ClientEntity clientEntity) {
+    public void delete(InvoiceEntity invoiceEntity) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            ClientEntity clientToDelete = em.find(ClientEntity.class, clientEntity.getIdClient());
-            em.remove(clientToDelete);
+            InvoiceEntity invoiceToDelete = em.find(InvoiceEntity.class, invoiceEntity.getIdInvoice());
+            em.remove(invoiceToDelete);
             et.commit();
         } catch (Exception e) {
             e.printStackTrace();

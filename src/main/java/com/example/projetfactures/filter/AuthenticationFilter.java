@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/client/*")
+@WebFilter(urlPatterns = "/client")
 public class AuthenticationFilter implements Filter {
 
     @Override

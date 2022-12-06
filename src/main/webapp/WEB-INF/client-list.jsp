@@ -20,6 +20,7 @@
 <c:forEach items="${clients}" var="client">
     <tr>
     <td id="clientId">${client.idClient} - ${client.nameClient} - ${client.cityClient}</td>
+        <td><a class="btn btn-success" href="${pageContext.request.contextPath}/client/invoice?id=${client.idClient}">Ces Factures</a></td>
     </tr>
 </c:forEach>
 </tbody>

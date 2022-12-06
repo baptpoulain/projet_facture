@@ -19,7 +19,7 @@ public class ProductEntity {
     private Integer priceHtProduct;
     @Basic
     @Column(name = "id_tva")
-    private String idTva;
+    private Integer idTva;
     @OneToMany(mappedBy = "productByIdProduct")
     private Collection<InvoiceProductEntity> invoiceProductsByIdProduct;
     @ManyToOne
@@ -50,11 +50,11 @@ public class ProductEntity {
         this.priceHtProduct = priceHtProduct;
     }
 
-    public String getIdTva() {
+    public Integer getIdTva() {
         return idTva;
     }
 
-    public void setIdTva(String idTva) {
+    public void setIdTva(Integer idTva) {
         this.idTva = idTva;
     }
 

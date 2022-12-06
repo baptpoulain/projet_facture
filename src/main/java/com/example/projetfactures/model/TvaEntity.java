@@ -11,18 +11,18 @@ public class TvaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_tva")
-    private String idTva;
+    private int idTva;
     @Basic
     @Column(name = "taux_tva")
     private BigDecimal tauxTva;
     @OneToMany(mappedBy = "tvaByIdTva")
     private Collection<ProductEntity> productsByIdTva;
 
-    public String getIdTva() {
+    public int getIdTva() {
         return idTva;
     }
 
-    public void setIdTva(String idTva) {
+    public void setIdTva(int idTva) {
         this.idTva = idTva;
     }
 
@@ -41,7 +41,7 @@ public class TvaEntity {
 
         TvaEntity tvaEntity = (TvaEntity) o;
 
-        if (idTva != null ? !idTva.equals(tvaEntity.idTva) : tvaEntity.idTva != null) return false;
+        if (idTva != tvaEntity.idTva) return false;
         if (tauxTva != null ? !tauxTva.equals(tvaEntity.tauxTva) : tvaEntity.tauxTva != null) return false;
 
         return true;
@@ -49,7 +49,7 @@ public class TvaEntity {
 
     @Override
     public int hashCode() {
-        int result = idTva != null ? idTva.hashCode() : 0;
+        int result = idTva;
         result = 31 * result + (tauxTva != null ? tauxTva.hashCode() : 0);
         return result;
     }
